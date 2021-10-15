@@ -2140,7 +2140,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-/* An example React component */
+/* Main Component */
 
 
 
@@ -2150,17 +2150,60 @@ var Main = /*#__PURE__*/function (_Component) {
   var _super = _createSuper(Main);
 
   function Main() {
+    var _this;
+
     _classCallCheck(this, Main);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this); //Initialize the state in the constructor
+
+    _this.state = {
+      products: []
+    };
+    return _this;
   }
+  /*componentDidMount() is a lifecycle method
+   * that gets called after the component is rendered
+   */
+
 
   _createClass(Main, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      /* fetch API in action */
+      fetch('/api/products').then(function (response) {
+        return response.json();
+      }).then(function (products) {
+        //Fetched product is stored in the state
+        _this2.setState({
+          products: products
+        });
+      });
+    }
+  }, {
+    key: "renderProducts",
+    value: function renderProducts() {
+      return this.state.products.map(function (product) {
+        return (
+          /*#__PURE__*/
+
+          /* When using list you need to specify a key
+           * attribute that is unique for each list item
+          */
+          (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+            children: product.title
+          }, product.id)
+        );
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      /* Some css code has been removed for brevity */
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
-          children: "All Products"
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+          children: this.renderProducts()
         })
       });
     }
