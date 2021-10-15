@@ -10,6 +10,7 @@
 <body>
     <h2 style="text-align: center"> Laravel and React application </h2>
     <div id="root"></div>
+    <script src="{{asset('js/jquery.min.js')}}" ></script>
     <script src="{{mix('js/app.js')}}" ></script>
     </body>
 </html>

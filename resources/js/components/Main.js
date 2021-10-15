@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React from "react";
 import ReactDOM from 'react-dom';
 
 /* Main Component */
-class Main extends Component {
+class Main extends React.Component {
 
-    constructor() {
-
-        super();
+    constructor(props) {
+        super(props);
         //Initialize the state in the constructor
         this.state = {
             products: [],
@@ -16,15 +15,10 @@ class Main extends Component {
      * that gets called after the component is rendered
      */
     componentDidMount() {
-        /* fetch API in action */
-        fetch('/api/products')
-            .then(response => {
-                return response.json();
-            })
-            .then(products => {
-                //Fetched product is stored in the state
-                this.setState({ products });
-            });
+
+        $.get('/api/products', products => {
+            this.setState({ products });
+        });
     }
 
     renderProducts() {

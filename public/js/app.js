@@ -2144,17 +2144,17 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var Main = /*#__PURE__*/function (_Component) {
-  _inherits(Main, _Component);
+var Main = /*#__PURE__*/function (_React$Component) {
+  _inherits(Main, _React$Component);
 
   var _super = _createSuper(Main);
 
-  function Main() {
+  function Main(props) {
     var _this;
 
     _classCallCheck(this, Main);
 
-    _this = _super.call(this); //Initialize the state in the constructor
+    _this = _super.call(this, props); //Initialize the state in the constructor
 
     _this.state = {
       products: []
@@ -2171,11 +2171,7 @@ var Main = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      /* fetch API in action */
-      fetch('/api/products').then(function (response) {
-        return response.json();
-      }).then(function (products) {
-        //Fetched product is stored in the state
+      $.get('/api/products', function (products) {
         _this2.setState({
           products: products
         });
